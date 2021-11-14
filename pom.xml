@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cloudrural</groupId>
-	<artifactId>demo-spring-monitor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>demospringmonitor</artifactId>
+	<version>v2021.11</version>
 	<name>demo-spring-monitor</name>
 	<description>Monitoring Project</description>
 	<properties>
@@ -32,6 +32,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
