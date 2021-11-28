@@ -4,7 +4,7 @@ service:
   port: 8080
   image:
     path: 065740665475.dkr.ecr.us-east-2.amazonaws.com/crops/demospringmonitor
-    tag: latest
+    tag: v2021.11
 
 ingress:
   host: app.cloudrural.com
