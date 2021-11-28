@@ -74,14 +74,9 @@ pipeline {
         stage('Deploy') {
             steps{  
                 script {
-                  withCredentials([file(credentialsId: '$K8S_SECRET', variable: 'KUBECONFIG')]) {
-                    // change context with related namespace
-                    //sh "kubectl config set-context $(kubectl config current-context) --namespace=${namespace}"
-
-                    //Deploy with Helm
                     sh "echo Deploying"
                     sh "helm upgrade --install $ARTIFACT_NAME deploymemt/helm/$ARTIFACT_NAME --namespace app"
-                  }
+
                    //sh "helm upgrade --install $ARTIFACT_NAME deploymemt/helm/$ARTIFACT_NAME"
                 }
             }
