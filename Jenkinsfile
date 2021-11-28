@@ -3,11 +3,12 @@ pipeline {
     environment {
         AWS_ACCOUNT_ID="065740665475"
         AWS_DEFAULT_REGION="us-east-2" 
-        IMAGE_REPO_NAME="crops/demospringmonitor"
+        IMAGE_REPO_NAME="bharathpantala/demospringmonitor"
         ARTIFACT_NAME="demospringmonitor"
         IMAGE_TAG="v2021.11"
-        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        AWS_CREDS_ID = "aws-creds-ecr"
+        REPOSITORY_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        AWS_CREDS_ID="aws-creds-ecr"
+        DH_CREDS_ID="docker-hub-secret"
         K8S_SECRET="k8s-secret"
     }
     stages {
@@ -31,6 +32,25 @@ pipeline {
                 }
             }
         }
+        stage('Logging into Docker Hub') {
+            steps {
+                script {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.DH_CREDS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                    sh "docker login --username $USERNAME -p $PASSWORD docker.io"
+                    }
+                }
+            }
+        }   
+        // Uploading Docker images into AWS ECR
+        stage('Pushing to Dockerhub') {
+            steps{  
+                script {
+                sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
+                sh "docker push bharathpantala/demospringmonitor:${IMAGE_TAG}"
+                }
+            }
+        }
+/*
         stage('Logging into AWS ECR') {
             steps {
                 script {
@@ -49,6 +69,7 @@ pipeline {
                 }
             }
         }
+*/
         // Uploading Docker images into AWS ECR
         stage('Deploy') {
             steps{  
