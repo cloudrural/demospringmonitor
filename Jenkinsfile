@@ -7,7 +7,7 @@ pipeline {
         ARTIFACT_NAME="demospringmonitor"
         IMAGE_TAG="v2021.11"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        AWS_CREDS_ID = "aws-ecr-creds"
+        AWS_CREDS_ID = "aws-creds-ecr"
         K8S_SECRET="k8s-secret"
     }
     stages {
