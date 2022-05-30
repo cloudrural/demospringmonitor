@@ -31,9 +31,6 @@ spec:
         - image: {{ .Values.service.image.path }}:{{ .Values.service.image.tag }}
           imagePullPolicy: Always
           name: {{ .Values.service.name }}
-          env:
-          - name: CONFIG_SERVER
-            value: {{ .Values.environments.CONFIG_SERVER }}
           ports:
             - containerPort: {{ .Values.service.port }}
               name: http
