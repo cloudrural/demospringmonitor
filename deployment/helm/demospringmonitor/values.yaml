@@ -1,14 +1,14 @@
-namespace: app
+namespace: logging
 service:
   name: demospringmonitor
-  port: 8080
+  port: 80
   image:
-    path: 065740665475.dkr.ecr.us-east-2.amazonaws.com/crops/demospringmonitor
-    tag: v2021.11
+    path: nginx
+    tag: latest
 
 ingress:
-  host: app.cloudrural.com
-  path: "/demospringmonitor"
+  host: app.cloudrural.net
+  path: "/nginx"
 
 #environments:
 
